@@ -7,6 +7,12 @@
 {% block content %}
 <div>
     <h1>Результат запроса</h1>
-    <р2>Ваш ответ: </р2>
+</div>
+<div class="card-base">
+    <ul>
+        <li>Базовая валюта: {{ query_type_input }} | денежная сумма: {{ sum_of_money }}</li>
+        <li>Валюта для перевода: {{ query_type_output }} | денежная сумма: {{ sum_of_result }}</li>
+
+    </ul>
 </div>
 {% endblock %}

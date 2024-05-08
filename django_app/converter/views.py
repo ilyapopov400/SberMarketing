@@ -18,7 +18,8 @@ class Converter(View):
     '''
     заполнение формы для конвертера
     '''
-    def get(self, request, **kwargs):
+
+    def get(self, request):
         form = forms.ConverterForm
         template_name = "converter/converter.html"
         context = {"form": form}
@@ -26,3 +27,17 @@ class Converter(View):
                       template_name=template_name,
                       context=context)
 
+    def post(self, request):
+        template_name = "converter/result.html"
+        form = forms.ConverterForm(request.POST)
+        context = {}
+        if form.is_valid():
+            data = form.cleaned_data
+            context["query_type_input"] = data.get("query_type_input")  # основная валюта
+            context["query_type_output"] = data.get("query_type_output")  # валюта для перевода
+            context["sum_of_money"] = data.get("sum_of_money")  # сумма исходная
+            context["sum_of_result"] = 111  # сумма перевода   # TODO сделать пересчет суммы
+
+        return render(request=request,
+                      template_name=template_name,
+                      context=context)
