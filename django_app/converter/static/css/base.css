@@ -1,0 +1,15 @@
+html {
+    background-color: cyan;
+}
+
+.card-base {
+    background-color: bisque;
+    margin: 10px;
+    padding: 10px;
+}
+
+.navbar {
+    background-color: mediumslateblue;
+    margin: 10px;
+    padding: 10px;
+}
