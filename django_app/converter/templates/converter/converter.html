@@ -1,0 +1,26 @@
+{% extends 'converter/base.html'  %}
+{% load static %}
+
+
+{% block title %}заполнение формы запроса{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Выберете валюту и сумму для конвертации</h1>
+</div>
+<div class="card-base">
+    <form action="" method="post">
+        {% csrf_token %}
+        <ul>
+            {% for field in form %}
+            <li>{{ field.label }} {{ field }}</li><br>
+            {% endfor %}
+        </ul>
+        <div>
+            <button type="submit" value="тип запроса">отправить запрос</button>
+            |
+            <button type="reset">очистить форму</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
