@@ -1,5 +1,3 @@
-# from tmp_api_dict import api_dict
-
 api_dict_today = {'result': 'success', 'provider': 'https://www.exchangerate-api.com',
                   'documentation': 'https://www.exchangerate-api.com/docs/free',
                   'terms_of_use': 'https://www.exchangerate-api.com/terms', 'time_last_update_unix': 1715212951,

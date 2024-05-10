@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.base import TemplateView
 
+import json
 from . import forms
 from . import currency_converter
+from . import models
 
 
 # Create your views here.
@@ -29,6 +31,10 @@ class Converter(View):
                       context=context)
 
     def post(self, request):
+        model = models.DateConverter
+        all_dates = model.objects.all()
+        api_dict_today = json.loads(all_dates[0].date_json)
+
         template_name = "converter/result.html"
         form = forms.ConverterForm(request.POST)
         context = {}
@@ -41,6 +47,7 @@ class Converter(View):
                 query_type_input=context["query_type_input"],
                 query_type_output=context["query_type_output"],
                 sum_of_money=context["sum_of_money"],
+                data_dict=api_dict_today,
             )()
             context["sum_of_result"] = round(result, 2)
 
