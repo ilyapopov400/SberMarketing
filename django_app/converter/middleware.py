@@ -25,7 +25,7 @@ class CheckApi:
         renewal_day = renewal_day.split()[:-1]
         renewal_day = " ".join(renewal_day)
         now = datetime.datetime.now().date()
-        renewal_day = datetime.datetime.strptime(renewal_day, "%a, %d %B %Y %H:%M:%S").date()
+        renewal_day = datetime.datetime.strptime(renewal_day, "%a, %d %b %Y %H:%M:%S").date()
 
         return not (now < renewal_day)
 
