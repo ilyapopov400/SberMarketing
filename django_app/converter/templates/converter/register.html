@@ -6,13 +6,13 @@
 
 {% block content %}
 <div>
-    <h1>Страница регистрации в приложении корвертера валют</h1>
+    <h1>Страница регистрации в приложении конвертера валют</h1>
 </div>
 
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Регистрация</button>
+    <button type="submit">Зарегистрироваться в приложении</button>
 </form>
 
 

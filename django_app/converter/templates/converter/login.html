@@ -6,6 +6,14 @@
 
 {% block content %}
 <div>
-    <h1>Страница аутентификации в приложении корвертера валют</h1>
+    <h1>Страница аутентификации в приложении конвертера валют</h1>
 </div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти в приложение</button>
+</form>
+
+
 {% endblock %}

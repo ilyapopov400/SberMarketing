@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import CreateView
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.views import LoginView, LogoutView
 
 import json
 from . import forms
@@ -32,12 +34,38 @@ class RegisterUser(CreateView):
         context = super().get_context_data(**kwargs)
         return context
 
+    def form_valid(self, form):
+        """
+        При успешной регистрации автоматически проводим аутентификацию
+        и переходим на главную страницу приложения
+        :param form:
+        :return:
+        """
+        user = form.save()
+        login(self.request, user)
+        return redirect("converter:index")
 
-class Login(TemplateView):  # TODO
+
+class LoginUser(LoginView):
     '''
     Страница аутентификации в приложении converter
     '''
+    form_class = AuthenticationForm
     template_name = "converter/login.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy("converter:index")
+
+
+class LogoutUser(LogoutView):
+    """
+    Выход из идентификации пользователя
+    """
+    template_name = "converter/index.html"
 
 
 class Converter(View):
