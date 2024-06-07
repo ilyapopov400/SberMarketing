@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.views.generic import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 import json
 from . import forms
@@ -12,14 +15,34 @@ from . import models
 
 class Index(TemplateView):
     '''
-    стартовая страница приложения converter
+    Стартовая страница приложения converter
     '''
     template_name = "converter/index.html"
 
 
+class RegisterUser(CreateView):
+    '''
+    Страница регистрации в приложении converter
+    '''
+    form_class = UserCreationForm
+    template_name = "converter/register.html"
+    success_url = reverse_lazy("converter:login")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class Login(TemplateView):  # TODO
+    '''
+    Страница аутентификации в приложении converter
+    '''
+    template_name = "converter/login.html"
+
+
 class Converter(View):
     '''
-    заполнение формы для конвертера
+    Заполнение формы для конвертера
     '''
 
     def get(self, request):

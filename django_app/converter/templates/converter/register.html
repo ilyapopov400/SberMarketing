@@ -1,0 +1,19 @@
+{% extends 'converter/base.html'  %}
+{% load static %}
+
+
+{% block title %}Cтраница регистрации приложения{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Страница регистрации в приложении корвертера валют</h1>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Регистрация</button>
+</form>
+
+
+{% endblock %}
